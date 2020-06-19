@@ -42,7 +42,9 @@
         <script src="data/gr2_memas_2.js"></script>
         <script src="data/gr3_masme_3.js"></script>
         <script src="data/gr1_meme_4.js"></script>
+        <!-- La estructura del código se repite de manera casi idéntica 4 veces debido a que se establecen 4 categorías (es decir, cuatro capas puntuales) con los mismos atributos y forma de proceder -->
         <script>
+        // Añadimos el menú con las opciones: zoom in, zoom out, localización, medir y búsquedas
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
@@ -81,6 +83,7 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
+        // Introducimos la capa de municipio -->
         function pop_municipio_Sevilla2_0(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -97,6 +100,7 @@
                 },
                 mouseover: highlightFeature,
             });
+            // Visualización de la tabla de atributos a partir de popup. Se introduce el nombre de la entidad para una mejor comprensión de los datos
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['COD_MUN'] !== null ? autolinker.link(feature.properties['COD_MUN'].toLocaleString()) : '') + '</td>\
@@ -130,7 +134,7 @@
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
-
+        // Simbología de la capa municipios Sevilla 
         function style_municipio_Sevilla2_0_0() {
             return {
                 pane: 'pane_municipio_Sevilla2_0',
@@ -146,6 +150,7 @@
                 interactive: true,
             }
         }
+        // Visualización de la capa de municipios de Sevilla
         map.createPane('pane_municipio_Sevilla2_0');
         map.getPane('pane_municipio_Sevilla2_0').style.zIndex = 400;
         map.getPane('pane_municipio_Sevilla2_0').style['mix-blend-mode'] = 'normal';
@@ -158,8 +163,10 @@
             onEachFeature: pop_municipio_Sevilla2_0,
             style: style_municipio_Sevilla2_0_0,
         });
+    
         bounds_group.addLayer(layer_municipio_Sevilla2_0);
         map.addLayer(layer_municipio_Sevilla2_0);
+        // Aquí comienza la estructura de la simbología, y se repite otras tres veces de manera análoga
         function pop_gr4_masmas_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -176,6 +183,7 @@
                 },
                 mouseover: highlightFeature,
             });
+            // Visualización de la tabla de atributos de la capa puntual de la categoría 1
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><b> Municipio: </b>' + (feature.properties['MUNICIPIO'] !== null ? autolinker.link(feature.properties['MUNICIPIO'].toLocaleString()) : '') + '</td>\
@@ -213,7 +221,7 @@
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
-
+        // Definimos una función para generar la simbologia de la capa puntual de la categoría 1 estableciendo diferentes intervalos con bucles if
         function style_gr4_masmas_1_0(feature) {
             if (feature.properties['Poblacion'] >= 1120.000000 && feature.properties['Poblacion'] <= 2000.000000 ) {
                 return {
@@ -293,6 +301,7 @@
             }
             }
         }
+        // Visualizaición de la capa puntual de la categoría 1
         map.createPane('pane_gr4_masmas_1');
         map.getPane('pane_gr4_masmas_1').style.zIndex = 401;
         map.getPane('pane_gr4_masmas_1').style['mix-blend-mode'] = 'normal';
@@ -313,6 +322,7 @@
         });
         bounds_group.addLayer(layer_gr4_masmas_1);
         map.addLayer(layer_gr4_masmas_1);
+        // A partir de aquí se vuelve a repetir la estructura anterior
         function pop_gr2_memas_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -366,7 +376,6 @@
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
-
         function style_gr2_memas_2_0(feature) {
             if (feature.properties['Poblacion'] >= 1120.000000 && feature.properties['Poblacion'] <= 2000.000000 ) {
                 return {
@@ -782,6 +791,7 @@
                 this._div.innerHTML = '<h2>Casos de Covid-19 en Sevilla hasta el 22 de abril</h2>';
             };
             title.addTo(map);
+        // Una vez  terminada la simbología, terminamos de añadir algunos botones al menú: busqueda 
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -791,7 +801,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-        .title += 'Search for a place';
+        .title += 'Busca un lugar';
         var baseMaps = {};
         L.control.layers(baseMaps,{'gr1_meme<br /><table><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_20000.png" /></td><td>< 2000</td></tr><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_2000a49991.png" /></td><td>2000 a 4999</td></tr><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_5000a99992.png" /></td><td>5000 a 9999</td></tr><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_10000a199993.png" /></td><td>10000 a 19999</td></tr><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_20000a499994.png" /></td><td>20000 a 49999</td></tr><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_50000a1000005.png" /></td><td>50000 a 100000</td></tr><tr><td style="text-align: center;"><img src="legend/gr1_meme_4_1000006.png" /></td><td>>100000</td></tr></table>': layer_gr1_meme_4,'gr3_masme<br /><table><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_20000.png" /></td><td>< 2000</td></tr><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_2000a49991.png" /></td><td>2000 a 4999</td></tr><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_5000a99992.png" /></td><td>5000 a 9999</td></tr><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_10000a199993.png" /></td><td>10000 a 19999</td></tr><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_20000a499994.png" /></td><td>20000 a 49999</td></tr><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_50000a1000005.png" /></td><td>50000 a 100000</td></tr><tr><td style="text-align: center;"><img src="legend/gr3_masme_3_1000006.png" /></td><td>>100000</td></tr></table>': layer_gr3_masme_3,'gr2_memas<br /><table><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_20000.png" /></td><td>< 2000</td></tr><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_2000a49991.png" /></td><td>2000 a 4999</td></tr><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_5000a99992.png" /></td><td>5000 a 9999</td></tr><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_10000a199993.png" /></td><td>10000 a 19999</td></tr><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_20000a499994.png" /></td><td>20000 a 49999</td></tr><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_50000a1000005.png" /></td><td>50000 a 100000</td></tr><tr><td style="text-align: center;"><img src="legend/gr2_memas_2_1000006.png" /></td><td>>100000</td></tr></table>': layer_gr2_memas_2,'gr4_masmas<br /><table><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_20000.png" /></td><td>< 2000</td></tr><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_2000a49991.png" /></td><td>2000 a 4999</td></tr><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_5000a99992.png" /></td><td>5000 a 9999</td></tr><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_10000a199993.png" /></td><td>10000 a 19999</td></tr><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_20000a499994.png" /></td><td>20000 a 49999</td></tr><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_50000a1000005.png" /></td><td>50000 a 100000</td></tr><tr><td style="text-align: center;"><img src="legend/gr4_masmas_1_1000006.png" /></td><td>>100000</td></tr></table>': layer_gr4_masmas_1,'<img src="legend/municipio_Sevilla2_0.png" /> municipio_Sevilla2': layer_municipio_Sevilla2_0,}).addTo(map);
         setBounds();
